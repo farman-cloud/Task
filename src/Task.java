@@ -65,10 +65,33 @@ public class Task {
 
         System.out.println("Reversed String: " + reversed);
     }
+
+    public void generateAnagrams(String str) {
+        generateAnagrams("", str);
+    }
+
+    private void generateAnagrams(String prefix, String remaining) {
+        int n = remaining.length();
+        if (n == 0) {
+            System.out.println(prefix);
+        } else {
+            for (int i = 0; i < n; i++) {
+                generateAnagrams(
+                        prefix + remaining.charAt(i),
+                        remaining.substring(0, i) + remaining.substring(i + 1)
+                );
+            }
+        }
+    }
+
+
 }
 
 class Main {
     public static void main(String[] args) {
-        
+        Task task = new Task();
+        String input = "abc";
+        System.out.println("Anagrams of \"" + input + "\":");
+        task.generateAnagrams(input);
     }
 }
